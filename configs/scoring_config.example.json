@@ -1,0 +1,41 @@
+{
+  "weights": {
+    "relevance_max": 60,
+    "impact_max": 20,
+    "recency_max": 20
+  },
+  "relevance": {
+    "max_unique_hits": 10,
+    "points_per_hit": 6,
+    "stopwords": [
+      "and",
+      "the",
+      "with",
+      "from",
+      "into",
+      "for",
+      "to",
+      "of",
+      "in",
+      "on",
+      "by",
+      "using",
+      "based",
+      "approach",
+      "framework",
+      "system",
+      "model",
+      "data"
+    ]
+  },
+  "topic_keywords": [
+    "emotion regulation",
+    "ecological momentary assessment",
+    "experience sampling",
+    "digital mental health",
+    "affective computing",
+    "multimodal",
+    "wearable"
+  ],
+  "preferred_authors": []
+}
