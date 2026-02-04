@@ -9,6 +9,12 @@ outputs/
 cache/
 .cache/
 .ipynb_checkpoints/
+
+# packaging artifacts
+*.egg-info/
+dist/
+build/
+
 # prevent accidental inclusion of local corpora
 *.sqlite
 *.db

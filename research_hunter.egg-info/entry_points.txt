@@ -1,2 +1,0 @@
-[console_scripts]
-research-hunter = research_hunter.cli:main
