@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Open-source tool to automate literature search, ranking, and export for researchers."
 readme = "README.md"
 requires-python = ">=3.10"
-license = {file = "LICENSE"}
+license = "MIT"
 authors = [{name = "Chencharl"}]
 dependencies = [
   "requests>=2.31.0",
@@ -13,6 +13,13 @@ dependencies = [
 
 [project.scripts]
 research-hunter = "research_hunter.cli:main"
+
+[tool.setuptools]
+# Avoid accidental inclusion of non-package directories (samples/, outputs/)
+
+[tool.setuptools.packages.find]
+include = ["research_hunter*"]
+exclude = ["samples*", "outputs*"]
 
 [tool.black]
 line-length = 100
