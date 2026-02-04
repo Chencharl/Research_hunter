@@ -1,0 +1,21 @@
+[project]
+name = "research-hunter"
+version = "0.1.0"
+description = "Open-source tool to automate literature search, ranking, and export for researchers."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "Chencharl"}]
+dependencies = [
+  "requests>=2.31.0",
+  "python-dotenv>=1.0.1",
+]
+
+[project.scripts]
+research-hunter = "research_hunter.cli:main"
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100

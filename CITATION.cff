@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Research Hunter"
+type: software
+authors:
+  - name: "Chencharl"
+version: 0.1.0
+date-released: "2026-02-04"
+license: MIT
+repository-code: "https://github.com/Chencharl/Research_hunter"

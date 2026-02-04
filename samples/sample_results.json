@@ -1,0 +1,18 @@
+[
+  {
+    "score": 86,
+    "score_note": "hits: emotion regulation, ecological momentary assessment, mental health",
+    "year": 2024,
+    "title": "Example Paper: Emotion Regulation via EMA",
+    "venue": "Journal of Example",
+    "url": "https://example.org/paper1"
+  },
+  {
+    "score": 62,
+    "score_note": "hits: affective computing, wellbeing, emotion",
+    "year": 2023,
+    "title": "Example Paper: Affective Computing for Wellbeing",
+    "venue": "Conference of Example",
+    "url": "https://example.org/paper2"
+  }
+]
