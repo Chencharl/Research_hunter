@@ -29,7 +29,9 @@ pip install -e .
 Create a `.env` file (see `.env.example`).
 
 Optional:
-- `SEMANTIC_SCHOLAR_API_KEY` to increase rate limits
+- `SEMANTIC_SCHOLAR_API_KEY` to increase rate limits (recommended)
+
+If you hit HTTP 429 (rate limit), add the key and retry.
 
 ## Usage
 Search for papers and export results:

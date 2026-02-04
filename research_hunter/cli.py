@@ -27,7 +27,12 @@ def _write_outputs(outdir: Path, rows: list[dict]) -> None:
 
 
 def cmd_search(args: argparse.Namespace) -> int:
-    papers = search_papers(query=args.query, limit=args.limit)
+    try:
+        papers = search_papers(query=args.query, limit=args.limit)
+    except RuntimeError as e:
+        # Friendly failure mode: write empty outputs rather than crashing.
+        print(f"[WARN] {e}")
+        papers = []
 
     rows: list[dict] = []
     for p in papers:
