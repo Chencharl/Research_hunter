@@ -1,3 +1,16 @@
+Metadata-Version: 2.4
+Name: research-hunter
+Version: 0.1.0
+Summary: Open-source tool to automate literature search, ranking, and export for researchers.
+Author: Chencharl
+License-Expression: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.31.0
+Requires-Dist: python-dotenv>=1.0.1
+Dynamic: license-file
+
 # Research Hunter
 
 Research Hunter automates the tedious first step of a literature review: **finding papers, filtering noise, and prioritizing what to read next**.

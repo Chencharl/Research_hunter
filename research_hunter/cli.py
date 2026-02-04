@@ -7,7 +7,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from research_hunter.clients.semantic_scholar import search_papers
-from research_hunter.scoring import score_text
+from research_hunter.scoring import score_paper
+from research_hunter.offline_analyzer import analyze_corpus
 
 
 def _write_outputs(outdir: Path, rows: list[dict]) -> None:
@@ -18,7 +19,7 @@ def _write_outputs(outdir: Path, rows: list[dict]) -> None:
     # lightweight CSV
     import csv
 
-    cols = ["score", "year", "title", "venue", "url", "score_note"]
+    cols = ["score", "year", "citations", "title", "venue", "url", "score_note"]
     with (outdir / "results.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
@@ -36,16 +37,16 @@ def cmd_search(args: argparse.Namespace) -> int:
 
     rows: list[dict] = []
     for p in papers:
-        text = "\n".join([p.get("title") or "", p.get("abstract") or "", p.get("venue") or ""])
-        sc = score_text(text)
+        sc = score_paper(p)
         rows.append(
             {
-                "score": sc.value,
+                "score": sc.total,
                 "score_note": sc.note,
                 "year": p.get("year") or "",
                 "title": p.get("title") or "",
                 "venue": p.get("venue") or "",
                 "url": p.get("url") or "",
+                "citations": p.get("citationCount") or "",
             }
         )
 
@@ -55,15 +56,33 @@ def cmd_search(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_analyze(args: argparse.Namespace) -> int:
+    analyze_corpus(
+        input_json=Path(args.input),
+        out_csv=Path(args.output),
+        cfg_path=Path(args.config) if args.config else None,
+        this_year=int(args.this_year),
+    )
+    print(f"[OK] wrote scored CSV: {args.output}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="research-hunter")
     sub = p.add_subparsers(dest="cmd", required=True)
 
-    s = sub.add_parser("search", help="Search papers and export ranked results")
+    s = sub.add_parser("search", help="Search papers via Semantic Scholar and export ranked results")
     s.add_argument("--query", required=True)
     s.add_argument("--limit", type=int, default=25)
     s.add_argument("--outdir", default="outputs")
     s.set_defaults(func=cmd_search)
+
+    a = sub.add_parser("analyze", help="Offline: score a local JSON corpus and write a CSV")
+    a.add_argument("--input", required=True, help="Path to JSON corpus (list of paper dicts)")
+    a.add_argument("--output", default="outputs/scored_papers.csv")
+    a.add_argument("--config", default=None, help="Optional JSON config path")
+    a.add_argument("--this-year", default="2026")
+    a.set_defaults(func=cmd_analyze)
 
     return p
 
