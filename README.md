@@ -36,6 +36,9 @@ pip install -e .
 ## Configuration
 Create a `.env` file (see `.env.example`).
 
+Scoring is configurable for offline runs via:
+- `configs/scoring_config.example.json`
+
 Optional but recommended:
 - `SEMANTIC_SCHOLAR_API_KEY` to increase rate limits
 

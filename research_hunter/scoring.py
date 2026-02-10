@@ -122,4 +122,10 @@ def score_paper(paper: Dict[str, Any], keywords: Dict[str, int] | None = None) -
     if year:
         note_bits.append(f"year={year}")
 
-    return Score(total=total, relevance=relevance, impact=impact, recency=recency, note="; ".join(note_bits))
+    return Score(
+        total=total,
+        relevance=relevance,
+        impact=impact,
+        recency=recency,
+        note="; ".join(note_bits),
+    )

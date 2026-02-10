@@ -5,11 +5,14 @@ from typing import Any, Dict, List, Optional
 
 import requests
 
-
 API_BASE = "https://api.semanticscholar.org/graph/v1"
 
 
-def search_papers(query: str, limit: int = 25, api_key: Optional[str] = None) -> List[Dict[str, Any]]:
+def search_papers(
+    query: str,
+    limit: int = 25,
+    api_key: Optional[str] = None,
+) -> List[Dict[str, Any]]:
     """Search Semantic Scholar.
 
     Uses the public Graph API. API key is optional.

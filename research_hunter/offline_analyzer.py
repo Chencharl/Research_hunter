@@ -33,7 +33,7 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Set, Tuple
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
 
 def _norm(s: str) -> str:
@@ -137,7 +137,13 @@ def _extract_author_names(p: Dict[str, Any]) -> List[str]:
     return [_norm(x) for x in out if _norm(x)]
 
 
-def _relevance_points(text: str, keywords: Sequence[str], stopwords: Set[str], max_hits: int, pph: int) -> Tuple[int, List[str]]:
+def _relevance_points(
+    text: str,
+    keywords: Sequence[str],
+    stopwords: Set[str],
+    max_hits: int,
+    pph: int,
+) -> Tuple[int, List[str]]:
     t = _tokenize(text)
     hits: List[str] = []
     for kw in keywords:
@@ -151,7 +157,7 @@ def _relevance_points(text: str, keywords: Sequence[str], stopwords: Set[str], m
 
     # unique hits only
     uniq = sorted(set(hits))
-    uniq = uniq[: max_hits]
+    uniq = uniq[:max_hits]
     pts = min(max_hits * pph, len(uniq) * pph)
     return int(pts), uniq
 

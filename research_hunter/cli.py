@@ -7,14 +7,17 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from research_hunter.clients.semantic_scholar import search_papers
-from research_hunter.scoring import score_paper
 from research_hunter.offline_analyzer import analyze_corpus
+from research_hunter.scoring import score_paper
 
 
 def _write_outputs(outdir: Path, rows: list[dict]) -> None:
     outdir.mkdir(parents=True, exist_ok=True)
 
-    (outdir / "results.json").write_text(json.dumps(rows, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    (outdir / "results.json").write_text(
+        json.dumps(rows, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
 
     # lightweight CSV
     import csv
@@ -71,7 +74,10 @@ def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="research-hunter")
     sub = p.add_subparsers(dest="cmd", required=True)
 
-    s = sub.add_parser("search", help="Search papers via Semantic Scholar and export ranked results")
+    s = sub.add_parser(
+        "search",
+        help="Search papers via Semantic Scholar and export ranked results",
+    )
     s.add_argument("--query", required=True)
     s.add_argument("--limit", type=int, default=25)
     s.add_argument("--outdir", default="outputs")
